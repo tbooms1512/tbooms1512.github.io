@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mi Letterboxd casero 🎬</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+    }
+    header {
+      padding: 1.5rem 1.5rem 0.75rem;
+      border-bottom: 1px solid #111827;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .title span.logo {
+      display: inline-flex;
+      width: 1.9rem;
+      height: 1.9rem;
+      border-radius: 0.6rem;
+      border: 1px solid #22c55e;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #22c55e;
+    }
+    .subtitle {
+      margin: 0.25rem 0 0.75rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    .controls input,
+    .controls select {
+      background: #020617;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 0.5rem 0.9rem;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .controls input:focus,
+    .controls select:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px #22c55e22;
+    }
+    main {
+      max-width: 1100px;
+      margin: 1.5rem auto 2rem;
+      padding: 0 1rem 2rem;
+    }
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .movie-card {
+      background: linear-gradient(135deg, #020617, #020617, #111827);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #111827;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .movie-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+    .movie-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .movie-year {
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+    .tagline {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .badge {
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+      border: 1px solid #4b5563;
+      color: #e5e7eb;
+      white-space: nowrap;
+    }
+    .stars {
+      display: flex;
+      gap: 0.1rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .stars span {
+      transition: transform 0.12s ease-out;
+    }
+    .stars span:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+    .stars .active {
+      color: #22c55e;
+      text-shadow: 0 0 10px #22c55e66;
+    }
+    .note-label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.25rem;
+    }
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      resize: vertical;
+      border-radius: 0.7rem;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 0.6rem 0.7rem;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    textarea:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px #22c55e22;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.25rem;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    .date-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px dashed #4b5563;
+      color: inherit;
+      font-size: inherit;
+      padding: 0.1rem 0;
+      outline: none;
+    }
+    .pill {
+      font-size: 0.75rem;
+      background: #0b1120;
+      border-radius: 999px;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid #1f2937;
+    }
+    footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.75rem;
+      padding-bottom: 1.5rem;
+    }
+    .empty-state {
+      text-align: center;
+      margin-top: 2rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="title">
+      <span class="logo">🎬</span>
+      Mi diario de cine
+    </h1>
+    <p class="subtitle">
+      Un mini-Letterboxd personal para calificar películas y dejar notas.
+    </p>
+    <div class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar película..."
+      />
+      <select id="ratingFilter">
+        <option value="0">Todas las calificaciones</option>
+        <option value="3">Solo 3⭐ o más</option>
+        <option value="4">Solo 4⭐ o más</option>
+        <option value="5">Solo 5⭐</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <section id="moviesSection">
+      <div class="movies-grid" id="moviesGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        No hay películas que coincidan con el filtro o búsqueda.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Hecho por mí con ❤️ · Datos guardados solo en este navegador (localStorage)
+  </footer>
+
+  <script>
+    // 🔹 1. Lista de películas base (edita esto con tus favoritas)
+    const movies = [
+      {
+        id: "pulp-fiction",
+        title: "Pulp Fiction",
+        year: 1994,
+        tags: ["Crimen", "Culto", "Tarantino"]
+      },
+      {
+        id: "the-godfather",
+        title: "El Padrino",
+        year: 1972,
+        tags: ["Mafia", "Clásico"]
+      },
+      {
+        id: "parasite",
+        title: "Parásitos",
+        year: 2019,
+        tags: ["Thriller", "Corea del Sur"]
+      },
+      {
+        id: "spiderverse",
+        title: "Spider-Man: Into the Spider-Verse",
+        year: 2018,
+        tags: ["Animación", "Superhéroes"]
+      },
+      {
+        id: "before-sunrise",
+        title: "Before Sunrise",
+        year: 1995,
+        tags: ["Romance", "Conversación"]
+      }
+    ];
+
+    // 🔹 2. Cargar estado desde localStorage
+    const STORAGE_KEY = "mi_diario_cine_v1";
+    let state = {};
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        state = raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        console.error("Error leyendo localStorage", e);
+        state = {};
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function getMovieState(id) {
+      if (!state[id]) {
+        state[id] = {
+          rating: 0,
+          note: "",
+          watchedAt: ""
+        };
+      }
+      return state[id];
+    }
+
+    // 🔹 3. Renderizar películas
+    const moviesGrid = document.getElementById("moviesGrid");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const ratingFilter = document.getElementById("ratingFilter");
+
+    function renderMovies() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      const minRating = parseInt(ratingFilter.value, 10);
+
+      moviesGrid.innerHTML = "";
+
+      const filtered = movies.filter((movie) => {
+        const mState = getMovieState(movie.id);
+        const matchesText =
+          movie.title.toLowerCase().includes(searchTerm) ||
+          movie.tags.join(" ").toLowerCase().includes(searchTerm);
+        const matchesRating = mState.rating >= minRating;
+        return matchesText && matchesRating;
+      });
+
+      if (filtered.length === 0) {
+        emptyState.style.display = "block";
+        return;
+      } else {
+        emptyState.style.display = "none";
+      }
+
+      filtered.forEach((movie) => {
+        const mState = getMovieState(movie.id);
+
+        const card = document.createElement("article");
+        card.className = "movie-card";
+
+        // Header: título, año, badge
+        const header = document.createElement("div");
+        header.className = "movie-header";
+
+        const titleBlock = document.createElement("div");
+        titleBlock.innerHTML = `
+          <div class="movie-title">${movie.title}</div>
+          <div class="movie-year">${movie.year}</div>
+          <div class="tagline">${movie.tags.join(" • ")}</div>
+        `;
+
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = mState.rating ? `${mState.rating}⭐ personal` : "Sin calificar";
+
+        header.appendChild(titleBlock);
+        header.appendChild(badge);
+
+        // Estrellas
+        const starsRow = document.createElement("div");
+        starsRow.className = "stars";
+
+        for (let i = 1; i <= 5; i++) {
+          const starSpan = document.createElement("span");
+          starSpan.textContent = "★";
+          if (i <= mState.rating) {
+            starSpan.classList.add("active");
+          }
+          starSpan.addEventListener("click", () => {
+            setRating(movie.id, i);
+          });
+          starsRow.appendChild(starSpan);
+        }
+
+        // Nota
+        const noteLabel = document.createElement("div");
+        noteLabel.className = "note-label";
+        noteLabel.textContent = "Notas / qué opiné de esta peli:";
+
+        const textarea = document.createElement("textarea");
+        textarea.value = mState.note || "";
+        textarea.placeholder = "Ej. La fotografía me encantó, pero el final se sintió flojo...";
+        textarea.addEventListener("input", (e) => {
+          const ms = getMovieState(movie.id);
+          ms.note = e.target.value;
+          saveState();
+        });
+
+        // Meta: fecha y pill
+        const metaRow = document.createElement("div");
+        metaRow.className = "meta-row";
+
+        const leftMeta = document.createElement("div");
+        leftMeta.innerHTML = `Vista el: 
+          <input 
+            type="date" 
+            class="date-input" 
+            value="${mState.watchedAt || ""}"
+          />`;
+
+        const dateInput = leftMeta.querySelector("input");
+        dateInput.addEventListener("change", (e) => {
+          const ms = getMovieState(movie.id);
+          ms.watchedAt = e.target.value;
+          saveState();
+        });
+
+        const rightMeta = document.createElement("div");
+        rightMeta.className = "pill";
+        rightMeta.textContent = "Guardado en este navegador";
+
+        metaRow.appendChild(leftMeta);
+        metaRow.appendChild(rightMeta);
+
+        card.appendChild(header);
+        card.appendChild(starsRow);
+        card.appendChild(noteLabel);
+        card.appendChild(textarea);
+        card.appendChild(metaRow);
+
+        moviesGrid.appendChild(card);
+      });
+    }
+
+    function setRating(movieId, rating) {
+      const ms = getMovieState(movieId);
+      ms.rating = rating;
+      saveState();
+      renderMovies(); // re-render para actualizar estrellas y badge
+    }
+
+    // 🔹 4. Eventos globales
+    searchInput.addEventListener("input", () => renderMovies());
+    ratingFilter.addEventListener("change", () => renderMovies());
+
+    // Inicializar
+    loadState();
+    renderMovies();
+  </script>
+</body>
+</html>
