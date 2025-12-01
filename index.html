@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Mi Letterboxd casero 🎬</title>
+  <title>Calificando peliculas  🎬</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #020617;
-      color: #e5e7eb;
+      background: #f4f4f5;
+      color: #111827;
     }
     * {
       box-sizing: border-box;
@@ -16,83 +16,199 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      background: #f4f4f5;
     }
+
     header {
-      padding: 1.5rem 1.5rem 0.75rem;
-      border-bottom: 1px solid #111827;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(10px);
+      padding: 1.5rem 1.5rem 1rem;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
       position: sticky;
       top: 0;
       z-index: 10;
     }
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      max-width: 1000px;
+      margin: 0 auto 0.5rem;
+    }
     .title {
       font-size: 1.6rem;
       font-weight: 700;
-      margin: 0;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      margin: 0;
     }
-    .title span.logo {
-      display: inline-flex;
-      width: 1.9rem;
-      height: 1.9rem;
-      border-radius: 0.6rem;
-      border: 1px solid #22c55e;
+    .logo {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 0.7rem;
+      border: 2px solid #22c55e;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      color: #22c55e;
+      font-size: 1.2rem;
+      background: #ecfdf5;
     }
     .subtitle {
-      margin: 0.25rem 0 0.75rem;
+      margin: 0;
       font-size: 0.9rem;
-      color: #9ca3af;
+      color: #6b7280;
+      max-width: 1000px;
+      margin: 0 auto;
     }
+
     .controls {
+      max-width: 1000px;
+      margin: 0.75rem auto 0;
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin-top: 0.25rem;
     }
     .controls input,
     .controls select {
-      background: #020617;
+      background: #f9fafb;
       border-radius: 999px;
-      border: 1px solid #4b5563;
+      border: 1px solid #d1d5db;
       padding: 0.5rem 0.9rem;
-      color: #e5e7eb;
+      color: #111827;
       font-size: 0.9rem;
       outline: none;
     }
     .controls input:focus,
     .controls select:focus {
       border-color: #22c55e;
-      box-shadow: 0 0 0 1px #22c55e22;
+      box-shadow: 0 0 0 2px #bbf7d029;
     }
+
     main {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 1.5rem auto 2rem;
       padding: 0 1rem 2rem;
     }
+
+    /* Sección formulario + nombre */
+    .section-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+    .section-card h2 {
+      font-size: 1rem;
+      margin: 0 0 0.4rem;
+    }
+    .section-card p {
+      font-size: 0.85rem;
+      margin: 0 0 0.75rem;
+      color: #6b7280;
+    }
+    .name-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .name-row label {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .name-row input {
+      padding: 0.4rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: #111827;
+      font-size: 0.9rem;
+      outline: none;
+      min-width: 180px;
+    }
+    .name-row input:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 2px #bbf7d029;
+      background: #ffffff;
+    }
+
+    #addMovieForm {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: flex-end;
+    }
+    #addMovieForm label {
+      font-size: 0.75rem;
+      color: #6b7280;
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+    #addMovieForm input {
+      width: 100%;
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: #111827;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    #addMovieForm input:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 2px #bbf7d029;
+      background: #ffffff;
+    }
+    .form-field {
+      flex: 1 1 180px;
+      min-width: 160px;
+    }
+    .form-field.year {
+      width: 110px;
+      flex: 0 0 auto;
+    }
+    .form-button {
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: none;
+      background: #22c55e;
+      color: #064e3b;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+    .form-button:hover {
+      background: #16a34a;
+    }
+    .form-button.secondary {
+      background: #e5e7eb;
+      color: #374151;
+    }
+    .form-button.secondary:hover {
+      background: #d4d4d8;
+    }
+
+    /* Grid de películas */
     .movies-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1rem;
+      margin-top: 1rem;
     }
     .movie-card {
-      background: linear-gradient(135deg, #020617, #020617, #111827);
+      background: #ffffff;
       border-radius: 1rem;
-      padding: 1rem;
-      border: 1px solid #111827;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+      padding: 0.9rem 0.9rem 0.8rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      position: relative;
-      overflow: hidden;
+      gap: 0.45rem;
     }
     .movie-header {
       display: flex;
@@ -105,59 +221,65 @@
       font-size: 1rem;
     }
     .movie-year {
-      color: #9ca3af;
+      color: #6b7280;
       font-size: 0.85rem;
     }
     .tagline {
       font-size: 0.8rem;
-      color: #9ca3af;
+      color: #6b7280;
+      margin-top: 0.15rem;
     }
     .badge {
       font-size: 0.7rem;
       border-radius: 999px;
-      padding: 0.15rem 0.55rem;
-      border: 1px solid #4b5563;
-      color: #e5e7eb;
+      padding: 0.15rem 0.6rem;
+      border: 1px solid #e5e7eb;
+      color: #4b5563;
+      background: #f9fafb;
       white-space: nowrap;
     }
+
     .stars {
       display: flex;
-      gap: 0.1rem;
-      font-size: 1.1rem;
+      gap: 0.15rem;
+      font-size: 1.15rem;
       cursor: pointer;
       user-select: none;
     }
     .stars span {
-      transition: transform 0.12s ease-out;
+      transition: transform 0.1s ease-out;
     }
     .stars span:hover {
-      transform: translateY(-2px) scale(1.05);
+      transform: translateY(-2px);
     }
     .stars .active {
-      color: #22c55e;
-      text-shadow: 0 0 10px #22c55e66;
+      color: #facc15;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     }
+
     .note-label {
       font-size: 0.75rem;
-      color: #9ca3af;
-      margin-top: 0.25rem;
+      color: #6b7280;
+      margin-top: 0.2rem;
     }
     textarea {
       width: 100%;
       min-height: 70px;
       resize: vertical;
       border-radius: 0.7rem;
-      border: 1px solid #374151;
-      background: #020617;
-      color: #e5e7eb;
-      padding: 0.6rem 0.7rem;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #111827;
+      padding: 0.5rem 0.6rem;
       font-size: 0.85rem;
       outline: none;
     }
     textarea:focus {
       border-color: #22c55e;
-      box-shadow: 0 0 0 1px #22c55e22;
+      box-shadow: 0 0 0 2px #bbf7d029;
+      background: #ffffff;
     }
+
     .meta-row {
       display: flex;
       justify-content: space-between;
@@ -165,12 +287,13 @@
       margin-top: 0.25rem;
       gap: 0.5rem;
       font-size: 0.75rem;
-      color: #9ca3af;
+      color: #6b7280;
+      flex-wrap: wrap;
     }
     .date-input {
       background: transparent;
       border: none;
-      border-bottom: 1px dashed #4b5563;
+      border-bottom: 1px dashed #d1d5db;
       color: inherit;
       font-size: inherit;
       padding: 0.1rem 0;
@@ -178,33 +301,65 @@
     }
     .pill {
       font-size: 0.75rem;
-      background: #0b1120;
+      background: #f3f4f6;
       border-radius: 999px;
-      padding: 0.15rem 0.5rem;
-      border: 1px solid #1f2937;
+      padding: 0.15rem 0.6rem;
+      border: 1px solid #e5e7eb;
+      color: #4b5563;
     }
-    footer {
-      text-align: center;
-      color: #6b7280;
+
+    .actions-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .action-button {
       font-size: 0.75rem;
-      padding-bottom: 1.5rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #4b5563;
+      cursor: pointer;
     }
+    .action-button:hover {
+      background: #e5e7eb;
+    }
+    .action-button.delete {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+    .action-button.delete:hover {
+      background: #fee2e2;
+    }
+
     .empty-state {
       text-align: center;
       margin-top: 2rem;
-      color: #6b7280;
+      color: #9ca3af;
       font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      padding: 0 1rem 1.5rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1 class="title">
-      <span class="logo">🎬</span>
-      Mi diario de cine
-    </h1>
+    <div class="title-row">
+      <h1 class="title">
+        <span class="logo">🎬</span>
+        Mi diario de cine
+      </h1>
+    </div>
     <p class="subtitle">
-      Un mini-Letterboxd personal para calificar películas y dejar notas.
+      Un mini-Letterboxd casero para anotar lo que veo, ponerle estrellas y dejar mis comentarios.
     </p>
     <div class="controls">
       <input
@@ -222,21 +377,80 @@
   </header>
 
   <main>
+    <!-- Nombre del usuario + formulario para agregar / editar películas -->
+    <section class="section-card">
+      <div class="name-row">
+        <label for="reviewerName">
+          Tu nombre (como quieres que salga en las críticas):
+        </label>
+        <input
+          type="text"
+          id="reviewerName"
+          placeholder="Ej. Tomás, T. Boom, etc."
+        />
+      </div>
+
+      <h2 id="formTitle">Agregar nueva película</h2>
+      <p id="formDescription">
+        Aquí puedes ir sumando las pelis que ves. Se guardan solo en este navegador,
+        así que no necesitas cuenta ni nada raro.
+      </p>
+      <form id="addMovieForm">
+        <div class="form-field">
+          <label for="newTitle">Título</label>
+          <input
+            type="text"
+            id="newTitle"
+            required
+            placeholder="Ej. Whiplash"
+          />
+        </div>
+        <div class="form-field year">
+          <label for="newYear">Año</label>
+          <input
+            type="number"
+            id="newYear"
+            placeholder="2014"
+          />
+        </div>
+        <div class="form-field">
+          <label for="newTags">Etiquetas / géneros</label>
+          <input
+            type="text"
+            id="newTags"
+            placeholder="Drama, Música, Intenso"
+          />
+        </div>
+        <button type="submit" id="formButton" class="form-button">
+          Agregar
+        </button>
+        <button
+          type="button"
+          id="cancelEditButton"
+          class="form-button secondary"
+          style="display:none;"
+        >
+          Cancelar
+        </button>
+      </form>
+    </section>
+
+    <!-- Grid de películas -->
     <section id="moviesSection">
       <div class="movies-grid" id="moviesGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none;">
-        No hay películas que coincidan con el filtro o búsqueda.
+        No hay películas que coincidan con la búsqueda o el filtro.
       </div>
     </section>
   </main>
 
   <footer>
-    Hecho por mí con ❤️ · Datos guardados solo en este navegador (localStorage)
+    
   </footer>
 
   <script>
-    // 🔹 1. Lista de películas base (edita esto con tus favoritas)
-    const movies = [
+    // 🔹 Lista base de películas (puedes cambiar estas por tus favoritas)
+    const baseMovies = [
       {
         id: "pulp-fiction",
         title: "Pulp Fiction",
@@ -269,22 +483,29 @@
       }
     ];
 
-    // 🔹 2. Cargar estado desde localStorage
-    const STORAGE_KEY = "mi_diario_cine_v1";
-    let state = {};
+    // 🔹 Claves para localStorage
+    const STATE_KEY   = "mi_diario_cine_estado_v1";      // rating, notas, fecha
+    const MOVIES_KEY  = "mi_diario_cine_peliculas_v1";   // lista de pelis
+    const NAME_KEY    = "mi_diario_cine_nombre_v1";      // nombre del crítico
 
+    let state = {};
+    let movies = [];
+    let reviewerName = "";
+    let editingMovieId = null;
+
+    // Cargar / guardar estado (calificación, nota, fecha)
     function loadState() {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        const raw = localStorage.getItem(STATE_KEY);
         state = raw ? JSON.parse(raw) : {};
       } catch (e) {
-        console.error("Error leyendo localStorage", e);
+        console.error("Error leyendo estado de localStorage", e);
         state = {};
       }
     }
 
     function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(STATE_KEY, JSON.stringify(state));
     }
 
     function getMovieState(id) {
@@ -298,11 +519,82 @@
       return state[id];
     }
 
-    // 🔹 3. Renderizar películas
-    const moviesGrid = document.getElementById("moviesGrid");
-    const emptyState = document.getElementById("emptyState");
-    const searchInput = document.getElementById("searchInput");
-    const ratingFilter = document.getElementById("ratingFilter");
+    // Cargar / guardar lista de películas
+    function loadMovies() {
+      try {
+        const raw = localStorage.getItem(MOVIES_KEY);
+        movies = raw ? JSON.parse(raw) : baseMovies;
+      } catch (e) {
+        console.error("Error leyendo películas de localStorage", e);
+        movies = baseMovies;
+      }
+    }
+
+    function saveMovies() {
+      localStorage.setItem(MOVIES_KEY, JSON.stringify(movies));
+    }
+
+    // Cargar / guardar nombre del crítico
+    function loadReviewerName() {
+      try {
+        const raw = localStorage.getItem(NAME_KEY);
+        reviewerName = raw || "";
+      } catch (e) {
+        console.error("Error leyendo nombre de localStorage", e);
+        reviewerName = "";
+      }
+    }
+
+    function saveReviewerName() {
+      localStorage.setItem(NAME_KEY, reviewerName);
+    }
+
+    // Slug para id
+    function slugify(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    }
+
+    // Referencias al DOM
+    const moviesGrid        = document.getElementById("moviesGrid");
+    const emptyState        = document.getElementById("emptyState");
+    const searchInput       = document.getElementById("searchInput");
+    const ratingFilter      = document.getElementById("ratingFilter");
+    const addMovieForm      = document.getElementById("addMovieForm");
+    const newTitleInput     = document.getElementById("newTitle");
+    const newYearInput      = document.getElementById("newYear");
+    const newTagsInput      = document.getElementById("newTags");
+    const formTitle         = document.getElementById("formTitle");
+    const formDescription   = document.getElementById("formDescription");
+    const formButton        = document.getElementById("formButton");
+    const cancelEditButton  = document.getElementById("cancelEditButton");
+    const reviewerNameInput = document.getElementById("reviewerName");
+
+    function setFormToAddMode() {
+      editingMovieId = null;
+      addMovieForm.reset();
+      formTitle.textContent = "Agregar nueva película";
+      formDescription.textContent =
+        "Aquí puedes ir sumando las pelis que ves. Se guardan solo en este navegador, así que no necesitas cuenta ni nada raro.";
+      formButton.textContent = "Agregar";
+      cancelEditButton.style.display = "none";
+    }
+
+    function setFormToEditMode(movie) {
+      editingMovieId = movie.id;
+      newTitleInput.value = movie.title || "";
+      newYearInput.value = movie.year || "";
+      newTagsInput.value = movie.tags ? movie.tags.join(", ") : "";
+      formTitle.textContent = "Editar película";
+      formDescription.textContent =
+        "Estás editando esta película. Cambia lo que quieras y guarda los cambios o cancela.";
+      formButton.textContent = "Guardar cambios";
+      cancelEditButton.style.display = "inline-block";
+    }
 
     function renderMovies() {
       const searchTerm = searchInput.value.toLowerCase().trim();
@@ -312,9 +604,11 @@
 
       const filtered = movies.filter((movie) => {
         const mState = getMovieState(movie.id);
-        const matchesText =
-          movie.title.toLowerCase().includes(searchTerm) ||
-          movie.tags.join(" ").toLowerCase().includes(searchTerm);
+        const text =
+          (movie.title || "") +
+          " " +
+          (movie.tags ? movie.tags.join(" ") : "");
+        const matchesText = text.toLowerCase().includes(searchTerm);
         const matchesRating = mState.rating >= minRating;
         return matchesText && matchesRating;
       });
@@ -332,28 +626,32 @@
         const card = document.createElement("article");
         card.className = "movie-card";
 
-        // Header: título, año, badge
         const header = document.createElement("div");
         header.className = "movie-header";
 
         const titleBlock = document.createElement("div");
+        const yearText = movie.year ? movie.year : "Año N/D";
+        const tagsText = movie.tags && movie.tags.length
+          ? movie.tags.join(" • ")
+          : "Sin etiquetas";
+
         titleBlock.innerHTML = `
           <div class="movie-title">${movie.title}</div>
-          <div class="movie-year">${movie.year}</div>
-          <div class="tagline">${movie.tags.join(" • ")}</div>
+          <div class="movie-year">${yearText}</div>
+          <div class="tagline">${tagsText}</div>
         `;
 
         const badge = document.createElement("div");
         badge.className = "badge";
-        badge.textContent = mState.rating ? `${mState.rating}⭐ personal` : "Sin calificar";
+        badge.textContent = mState.rating
+          ? `${mState.rating}⭐ opinión personal`
+          : "Sin calificar";
 
         header.appendChild(titleBlock);
         header.appendChild(badge);
 
-        // Estrellas
         const starsRow = document.createElement("div");
         starsRow.className = "stars";
-
         for (let i = 1; i <= 5; i++) {
           const starSpan = document.createElement("span");
           starSpan.textContent = "★";
@@ -366,31 +664,32 @@
           starsRow.appendChild(starSpan);
         }
 
-        // Nota
         const noteLabel = document.createElement("div");
         noteLabel.className = "note-label";
-        noteLabel.textContent = "Notas / qué opiné de esta peli:";
+        noteLabel.textContent = reviewerName
+          ? `Notas de ${reviewerName}:`
+          : "Notas / qué me pareció:";
 
         const textarea = document.createElement("textarea");
         textarea.value = mState.note || "";
-        textarea.placeholder = "Ej. La fotografía me encantó, pero el final se sintió flojo...";
+        textarea.placeholder = "Ej. La volvería a ver, el final me encantó...";
         textarea.addEventListener("input", (e) => {
           const ms = getMovieState(movie.id);
           ms.note = e.target.value;
           saveState();
         });
 
-        // Meta: fecha y pill
         const metaRow = document.createElement("div");
         metaRow.className = "meta-row";
 
         const leftMeta = document.createElement("div");
-        leftMeta.innerHTML = `Vista el: 
-          <input 
-            type="date" 
-            class="date-input" 
+        leftMeta.innerHTML = `Vista el:
+          <input
+            type="date"
+            class="date-input"
             value="${mState.watchedAt || ""}"
-          />`;
+          />
+        `;
 
         const dateInput = leftMeta.querySelector("input");
         dateInput.addEventListener("change", (e) => {
@@ -401,16 +700,43 @@
 
         const rightMeta = document.createElement("div");
         rightMeta.className = "pill";
-        rightMeta.textContent = "Guardado en este navegador";
+        rightMeta.textContent = reviewerName
+          ? `Crítica de: ${reviewerName}`
+          : "Crítica personal";
 
         metaRow.appendChild(leftMeta);
         metaRow.appendChild(rightMeta);
+
+        // Botones Editar / Borrar
+        const actionsRow = document.createElement("div");
+        actionsRow.className = "actions-row";
+
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.className = "action-button";
+        editButton.textContent = "Editar";
+        editButton.addEventListener("click", () => {
+          setFormToEditMode(movie);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.className = "action-button delete";
+        deleteButton.textContent = "Borrar";
+        deleteButton.addEventListener("click", () => {
+          deleteMovie(movie.id);
+        });
+
+        actionsRow.appendChild(editButton);
+        actionsRow.appendChild(deleteButton);
 
         card.appendChild(header);
         card.appendChild(starsRow);
         card.appendChild(noteLabel);
         card.appendChild(textarea);
         card.appendChild(metaRow);
+        card.appendChild(actionsRow);
 
         moviesGrid.appendChild(card);
       });
@@ -420,16 +746,99 @@
       const ms = getMovieState(movieId);
       ms.rating = rating;
       saveState();
-      renderMovies(); // re-render para actualizar estrellas y badge
+      renderMovies();
     }
 
-    // 🔹 4. Eventos globales
+    function deleteMovie(movieId) {
+      const movie = movies.find((m) => m.id === movieId);
+      const title = movie ? movie.title : "esta película";
+
+      if (!confirm(`¿Seguro que quieres borrar "${title}" de la lista?`)) {
+        return;
+      }
+
+      movies = movies.filter((m) => m.id !== movieId);
+      delete state[movieId];
+      saveMovies();
+      saveState();
+
+      if (editingMovieId === movieId) {
+        setFormToAddMode();
+      }
+
+      renderMovies();
+    }
+
+    // Eventos
     searchInput.addEventListener("input", () => renderMovies());
     ratingFilter.addEventListener("change", () => renderMovies());
 
+    addMovieForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const title = newTitleInput.value.trim();
+      const year = newYearInput.value ? parseInt(newYearInput.value, 10) : "";
+      const tags = newTagsInput.value
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+
+      if (!title) {
+        alert("Pon al menos un título 🙂");
+        return;
+      }
+
+      if (!editingMovieId) {
+        // ➕ Modo agregar
+        let id = slugify(title);
+        if (!id) {
+          id = `movie-${Date.now()}`;
+        }
+
+        if (movies.some((m) => m.id === id)) {
+          alert("Ya tienes una película con ese título.");
+          return;
+        }
+
+        const newMovie = { id, title, year, tags };
+        movies.push(newMovie);
+        saveMovies();
+        setFormToAddMode();
+        renderMovies();
+      } else {
+        // ✏️ Modo editar
+        const idx = movies.findIndex((m) => m.id === editingMovieId);
+        if (idx !== -1) {
+          movies[idx].title = title;
+          movies[idx].year = year;
+          movies[idx].tags = tags;
+          saveMovies();
+        }
+        setFormToAddMode();
+        renderMovies();
+      }
+    });
+
+    cancelEditButton.addEventListener("click", () => {
+      setFormToAddMode();
+    });
+
+    reviewerNameInput.addEventListener("input", (e) => {
+      reviewerName = e.target.value.trim();
+      saveReviewerName();
+      renderMovies();
+    });
+
     // Inicializar
     loadState();
+    loadMovies();
+    loadReviewerName();
+    if (reviewerName) {
+      reviewerNameInput.value = reviewerName;
+    }
+    setFormToAddMode();
     renderMovies();
   </script>
 </body>
 </html>
+
