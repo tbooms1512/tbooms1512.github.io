@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Calificando peliculas  🎬</title>
+  <title>Tomas Boom - Perfil Personal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -20,69 +20,137 @@
     }
 
     header {
-      padding: 1.5rem 1.5rem 1rem;
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      position: sticky;
+      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
       top: 0;
-      z-index: 10;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
     }
-    .title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
+    .header-content {
       max-width: 1000px;
-      margin: 0 auto 0.5rem;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
-    .title {
-      font-size: 1.6rem;
-      font-weight: 700;
+    .profile-section {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin: 0;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
     }
-    .logo {
-      width: 2.1rem;
-      height: 2.1rem;
-      border-radius: 0.7rem;
-      border: 2px solid #22c55e;
+    .profile-image-container {
+      position: relative;
+    }
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .profile-image-placeholder {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      background: #ecfdf5;
+      font-size: 3rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
-    .subtitle {
-      margin: 0;
+    .profile-info {
+      flex: 1;
+      min-width: 250px;
+    }
+    .profile-name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .profile-title {
+      font-size: 1.2rem;
+      margin: 0 0 1rem;
+      opacity: 0.95;
+      font-weight: 400;
+    }
+    .profile-bio {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0 0 1rem;
+      opacity: 0.9;
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
       font-size: 0.9rem;
-      color: #6b7280;
-      max-width: 1000px;
-      margin: 0 auto;
+    }
+    .contact-item a {
+      color: white;
+      text-decoration: none;
+    }
+    .contact-item a:hover {
+      text-decoration: underline;
     }
 
     .controls {
       max-width: 1000px;
-      margin: 0.75rem auto 0;
+      margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
+      position: relative;
+      z-index: 1;
     }
     .controls input,
     .controls select {
-      background: #f9fafb;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
       border-radius: 999px;
-      border: 1px solid #d1d5db;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       padding: 0.5rem 0.9rem;
-      color: #111827;
+      color: white;
       font-size: 0.9rem;
       outline: none;
     }
+    .controls input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
     .controls input:focus,
     .controls select:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 2px #bbf7d029;
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .controls select option {
+      background: #667eea;
+      color: white;
     }
 
     main {
@@ -91,99 +159,83 @@
       padding: 0 1rem 2rem;
     }
 
-    /* Sección formulario + nombre */
     .section-card {
       background: #ffffff;
       border-radius: 1rem;
-      padding: 1rem;
+      padding: 1.5rem;
       border: 1px solid #e5e7eb;
       margin-bottom: 1.25rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
     }
     .section-card h2 {
-      font-size: 1rem;
-      margin: 0 0 0.4rem;
+      font-size: 1.3rem;
+      margin: 0 0 0.5rem;
+      color: #111827;
     }
     .section-card p {
-      font-size: 0.85rem;
-      margin: 0 0 0.75rem;
-      color: #6b7280;
-    }
-    .name-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-    .name-row label {
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
-    .name-row input {
-      padding: 0.4rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid #d1d5db;
-      background: #f9fafb;
-      color: #111827;
       font-size: 0.9rem;
-      outline: none;
-      min-width: 180px;
-    }
-    .name-row input:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 2px #bbf7d029;
-      background: #ffffff;
+      margin: 0 0 1rem;
+      color: #6b7280;
+      line-height: 1.6;
     }
 
-    #addMovieForm {
+    #addSkillForm {
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
       align-items: flex-end;
     }
-    #addMovieForm label {
+    #addSkillForm label {
       font-size: 0.75rem;
       color: #6b7280;
       display: block;
       margin-bottom: 0.1rem;
+      font-weight: 500;
     }
-    #addMovieForm input {
+    #addSkillForm input,
+    #addSkillForm textarea {
       width: 100%;
-      padding: 0.4rem 0.6rem;
+      padding: 0.5rem 0.7rem;
       border-radius: 0.6rem;
       border: 1px solid #d1d5db;
       background: #f9fafb;
       color: #111827;
       font-size: 0.9rem;
       outline: none;
+      font-family: inherit;
     }
-    #addMovieForm input:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 2px #bbf7d029;
+    #addSkillForm input:focus,
+    #addSkillForm textarea:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
       background: #ffffff;
     }
     .form-field {
-      flex: 1 1 180px;
-      min-width: 160px;
+      flex: 1 1 200px;
+      min-width: 180px;
     }
     .form-field.year {
-      width: 110px;
+      width: 120px;
       flex: 0 0 auto;
     }
+    .form-field.full {
+      flex: 1 1 100%;
+    }
     .form-button {
-      padding: 0.55rem 1.1rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 999px;
       border: none;
-      background: #22c55e;
-      color: #064e3b;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
       font-weight: 600;
       font-size: 0.9rem;
       cursor: pointer;
       flex: 0 0 auto;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .form-button:hover {
-      background: #16a34a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
     .form-button.secondary {
       background: #e5e7eb;
@@ -191,69 +243,77 @@
     }
     .form-button.secondary:hover {
       background: #d4d4d8;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* Grid de películas */
-    .movies-grid {
+    .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
       margin-top: 1rem;
     }
-    .movie-card {
+    .skill-card {
       background: #ffffff;
       border-radius: 1rem;
-      padding: 0.9rem 0.9rem 0.8rem;
+      padding: 1.2rem;
       border: 1px solid #e5e7eb;
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.6rem;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .movie-header {
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+    .skill-header {
       display: flex;
       justify-content: space-between;
       gap: 0.5rem;
       align-items: flex-start;
     }
-    .movie-title {
+    .skill-title {
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      color: #111827;
     }
-    .movie-year {
+    .skill-year {
       color: #6b7280;
       font-size: 0.85rem;
     }
-    .tagline {
+    .skill-category {
       font-size: 0.8rem;
       color: #6b7280;
-      margin-top: 0.15rem;
+      margin-top: 0.2rem;
     }
     .badge {
       font-size: 0.7rem;
       border-radius: 999px;
-      padding: 0.15rem 0.6rem;
+      padding: 0.2rem 0.7rem;
       border: 1px solid #e5e7eb;
       color: #4b5563;
       background: #f9fafb;
       white-space: nowrap;
+      font-weight: 500;
     }
 
     .stars {
       display: flex;
-      gap: 0.15rem;
-      font-size: 1.15rem;
+      gap: 0.2rem;
+      font-size: 1.3rem;
       cursor: pointer;
       user-select: none;
     }
     .stars span {
       transition: transform 0.1s ease-out;
+      color: #d1d5db;
     }
     .stars span:hover {
-      transform: translateY(-2px);
+      transform: scale(1.2);
     }
     .stars .active {
-      color: #facc15;
+      color: #fbbf24;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     }
 
@@ -261,22 +321,24 @@
       font-size: 0.75rem;
       color: #6b7280;
       margin-top: 0.2rem;
+      font-weight: 500;
     }
     textarea {
       width: 100%;
-      min-height: 70px;
+      min-height: 80px;
       resize: vertical;
       border-radius: 0.7rem;
       border: 1px solid #e5e7eb;
       background: #f9fafb;
       color: #111827;
-      padding: 0.5rem 0.6rem;
+      padding: 0.6rem;
       font-size: 0.85rem;
       outline: none;
+      font-family: inherit;
     }
     textarea:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 2px #bbf7d029;
+      border-color: #667eea;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
       background: #ffffff;
     }
 
@@ -303,7 +365,7 @@
       font-size: 0.75rem;
       background: #f3f4f6;
       border-radius: 999px;
-      padding: 0.15rem 0.6rem;
+      padding: 0.2rem 0.7rem;
       border: 1px solid #e5e7eb;
       color: #4b5563;
     }
@@ -311,17 +373,20 @@
     .actions-row {
       display: flex;
       justify-content: flex-end;
-      gap: 0.4rem;
-      margin-top: 0.35rem;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #f3f4f6;
     }
     .action-button {
       font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 999px;
       border: 1px solid #e5e7eb;
       background: #f9fafb;
       color: #4b5563;
       cursor: pointer;
+      transition: all 0.2s;
     }
     .action-button:hover {
       background: #e5e7eb;
@@ -337,72 +402,107 @@
 
     .empty-state {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 3rem;
       color: #9ca3af;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      padding: 2rem;
     }
 
     footer {
       text-align: center;
       color: #9ca3af;
-      font-size: 0.8rem;
-      padding: 0 1rem 1.5rem;
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+      background: #ffffff;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 768px) {
+      .profile-name {
+        font-size: 2rem;
+      }
+      .profile-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .contact-info {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="title-row">
-      <h1 class="title">
-        <span class="logo">🎬</span>
-        Mi diario de cine
-      </h1>
-    </div>
-    <p class="subtitle">
-      Un mini-Letterboxd casero para anotar lo que veo, ponerle estrellas y dejar mis comentarios.
-    </p>
-    <div class="controls">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Buscar película..."
-      />
-      <select id="ratingFilter">
-        <option value="0">Todas las calificaciones</option>
-        <option value="3">Solo 3⭐ o más</option>
-        <option value="4">Solo 4⭐ o más</option>
-        <option value="5">Solo 5⭐</option>
-      </select>
+    <div class="header-content">
+      <div class="profile-section">
+        <div class="profile-image-container">
+          <!-- Coloca tu foto en images/profile.jpg o images/profile.jpeg -->
+          <img src="images/profile.jpg" alt="Tomas Boom" class="profile-image" id="profileImg" onerror="tryAlternativeImage(this);">
+          <div class="profile-image-placeholder" id="profilePlaceholder" style="display:none;">👤</div>
+        </div>
+        <div class="profile-info">
+          <h1 class="profile-name" id="profileName">Tomas Boom</h1>
+          <p class="profile-title" id="profileTitle">Desarrollador & Estudiante</p>
+          <p class="profile-bio" id="profileBio">
+            Apasionado por la tecnología, el desarrollo de software y el aprendizaje continuo. 
+            Me encanta crear soluciones innovadoras y compartir conocimiento con otros.
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <span>📧</span>
+              <a href="mailto:tu-email@ejemplo.com" id="emailLink">tu-email@ejemplo.com</a>
+            </div>
+            <div class="contact-item">
+              <span>💼</span>
+              <a href="https://github.com/tbooms1512" target="_blank" id="githubLink">GitHub</a>
+            </div>
+            <div class="contact-item">
+              <span>🔗</span>
+              <a href="https://linkedin.com/in/tu-perfil" target="_blank" id="linkedinLink">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar habilidad o logro..."
+        />
+        <select id="ratingFilter">
+          <option value="0">Todas las calificaciones</option>
+          <option value="3">Solo 3⭐ o más</option>
+          <option value="4">Solo 4⭐ o más</option>
+          <option value="5">Solo 5⭐</option>
+        </select>
+        <select id="categoryFilter">
+          <option value="">Todas las categorías</option>
+          <option value="Tecnología">Tecnología</option>
+          <option value="Programación">Programación</option>
+          <option value="Habilidades">Habilidades</option>
+          <option value="Logros">Logros</option>
+          <option value="Intereses">Intereses</option>
+        </select>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- Nombre del usuario + formulario para agregar / editar películas -->
     <section class="section-card">
-      <div class="name-row">
-        <label for="reviewerName">
-          Tu nombre (como quieres que salga en las críticas):
-        </label>
-        <input
-          type="text"
-          id="reviewerName"
-          placeholder="Ej. Tomás, T. Boom, etc."
-        />
-      </div>
-
-      <h2 id="formTitle">Agregar nueva película</h2>
+      <h2 id="formTitle">Agregar nueva habilidad o logro</h2>
       <p id="formDescription">
-        Aquí puedes ir sumando las pelis que ves. Se guardan solo en este navegador,
-        así que no necesitas cuenta ni nada raro.
+        Documenta tus habilidades, logros, proyectos o intereses. Cada entrada es como una "reseña" 
+        de algo que has aprendido o logrado. Puedes calificarlo y agregar notas sobre tu experiencia.
       </p>
-      <form id="addMovieForm">
+      <form id="addSkillForm">
         <div class="form-field">
-          <label for="newTitle">Título</label>
+          <label for="newTitle">Título / Nombre</label>
           <input
             type="text"
             id="newTitle"
             required
-            placeholder="Ej. Whiplash"
+            placeholder="Ej. Python, Docker, Proyecto X"
           />
         </div>
         <div class="form-field year">
@@ -410,15 +510,25 @@
           <input
             type="number"
             id="newYear"
-            placeholder="2014"
+            placeholder="2024"
+            min="2000"
+            max="2100"
           />
         </div>
         <div class="form-field">
-          <label for="newTags">Etiquetas / géneros</label>
+          <label for="newCategory">Categoría</label>
           <input
             type="text"
-            id="newTags"
-            placeholder="Drama, Música, Intenso"
+            id="newCategory"
+            placeholder="Ej. Programación, Tecnología, Logros"
+          />
+        </div>
+        <div class="form-field full">
+          <label for="newDescription">Descripción breve</label>
+          <input
+            type="text"
+            id="newDescription"
+            placeholder="Ej. Framework web moderno, Base de datos NoSQL"
           />
         </div>
         <button type="submit" id="formButton" class="form-button">
@@ -435,71 +545,75 @@
       </form>
     </section>
 
-    <!-- Grid de películas -->
-    <section id="moviesSection">
-      <div class="movies-grid" id="moviesGrid"></div>
+    <section id="skillsSection">
+      <div class="skills-grid" id="skillsGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none;">
-        No hay películas que coincidan con la búsqueda o el filtro.
+        No hay habilidades o logros que coincidan con la búsqueda o el filtro.
       </div>
     </section>
   </main>
 
   <footer>
-    
+    <p>Hecho por Tomas Boom</p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem;">Última actualización: <span id="lastUpdate"></span></p>
   </footer>
 
   <script>
-    // 🔹 Lista base de películas (puedes cambiar estas por tus favoritas)
-    const baseMovies = [
+    // 🔹 Lista base de habilidades/logros (puedes personalizar estas)
+    const baseSkills = [
       {
-        id: "pulp-fiction",
-        title: "Pulp Fiction",
-        year: 1994,
-        tags: ["Crimen", "Culto", "Tarantino"]
+        id: "python",
+        title: "Python",
+        year: 2023,
+        category: "Programación",
+        description: "Lenguaje de programación versátil"
       },
       {
-        id: "the-godfather",
-        title: "El Padrino",
-        year: 1972,
-        tags: ["Mafia", "Clásico"]
+        id: "fastapi",
+        title: "FastAPI",
+        year: 2024,
+        category: "Tecnología",
+        description: "Framework web moderno para APIs"
       },
       {
-        id: "parasite",
-        title: "Parásitos",
-        year: 2019,
-        tags: ["Thriller", "Corea del Sur"]
+        id: "docker",
+        title: "Docker",
+        year: 2024,
+        category: "Tecnología",
+        description: "Contenedores y orquestación"
       },
       {
-        id: "spiderverse",
-        title: "Spider-Man: Into the Spider-Verse",
-        year: 2018,
-        tags: ["Animación", "Superhéroes"]
-      },
-      {
-        id: "before-sunrise",
-        title: "Before Sunrise",
-        year: 1995,
-        tags: ["Romance", "Conversación"]
+        id: "mongodb",
+        title: "MongoDB",
+        year: 2024,
+        category: "Tecnología",
+        description: "Base de datos NoSQL"
       }
     ];
 
     // 🔹 Claves para localStorage
-    const STATE_KEY   = "mi_diario_cine_estado_v1";      // rating, notas, fecha
-    const MOVIES_KEY  = "mi_diario_cine_peliculas_v1";   // lista de pelis
-    const NAME_KEY    = "mi_diario_cine_nombre_v1";      // nombre del crítico
+    const STATE_KEY   = "mi_perfil_estado_v1";
+    const SKILLS_KEY  = "mi_perfil_habilidades_v1";
+    const PROFILE_KEY = "mi_perfil_datos_v1";
 
     let state = {};
-    let movies = [];
-    let reviewerName = "";
-    let editingMovieId = null;
+    let skills = [];
+    let profileData = {
+      name: "Tomas Boom Sanchez",
+      title: "Estudiante en Ciencia de Datos",
+      bio: "Estudio la licenciatura de Ciencia de Datos en el ITAM. Una de mis grandes pasiones son los deportes, en especial el futból y la NFL. Me gusta mucho convivir y hacer nuevos amigos.",
+      email: "tbooms1512@gmail.com",
+      github: "https://github.com/tbooms1512",
+      linkedin: "https://www.linkedin.com/in/tom%C3%A1s-boom-445700345/"
+    };
 
-    // Cargar / guardar estado (calificación, nota, fecha)
+    // Cargar / guardar estado
     function loadState() {
       try {
         const raw = localStorage.getItem(STATE_KEY);
         state = raw ? JSON.parse(raw) : {};
       } catch (e) {
-        console.error("Error leyendo estado de localStorage", e);
+        console.error("Error leyendo estado", e);
         state = {};
       }
     }
@@ -508,45 +622,57 @@
       localStorage.setItem(STATE_KEY, JSON.stringify(state));
     }
 
-    function getMovieState(id) {
+    function getSkillState(id) {
       if (!state[id]) {
         state[id] = {
           rating: 0,
           note: "",
-          watchedAt: ""
+          achievedAt: ""
         };
       }
       return state[id];
     }
 
-    // Cargar / guardar lista de películas
-    function loadMovies() {
+    // Cargar / guardar habilidades
+    function loadSkills() {
       try {
-        const raw = localStorage.getItem(MOVIES_KEY);
-        movies = raw ? JSON.parse(raw) : baseMovies;
+        const raw = localStorage.getItem(SKILLS_KEY);
+        skills = raw ? JSON.parse(raw) : baseSkills;
       } catch (e) {
-        console.error("Error leyendo películas de localStorage", e);
-        movies = baseMovies;
+        console.error("Error leyendo habilidades", e);
+        skills = baseSkills;
       }
     }
 
-    function saveMovies() {
-      localStorage.setItem(MOVIES_KEY, JSON.stringify(movies));
+    function saveSkills() {
+      localStorage.setItem(SKILLS_KEY, JSON.stringify(skills));
     }
 
-    // Cargar / guardar nombre del crítico
-    function loadReviewerName() {
+    // Cargar / guardar datos del perfil
+    function loadProfile() {
       try {
-        const raw = localStorage.getItem(NAME_KEY);
-        reviewerName = raw || "";
+        const raw = localStorage.getItem(PROFILE_KEY);
+        if (raw) {
+          profileData = { ...profileData, ...JSON.parse(raw) };
+        }
       } catch (e) {
-        console.error("Error leyendo nombre de localStorage", e);
-        reviewerName = "";
+        console.error("Error leyendo perfil", e);
       }
+      updateProfileUI();
     }
 
-    function saveReviewerName() {
-      localStorage.setItem(NAME_KEY, reviewerName);
+    function saveProfile() {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profileData));
+    }
+
+    function updateProfileUI() {
+      document.getElementById("profileName").textContent = profileData.name;
+      document.getElementById("profileTitle").textContent = profileData.title;
+      document.getElementById("profileBio").textContent = profileData.bio;
+      document.getElementById("emailLink").textContent = profileData.email;
+      document.getElementById("emailLink").href = `mailto:${profileData.email}`;
+      document.getElementById("githubLink").href = profileData.github;
+      document.getElementById("linkedinLink").href = profileData.linkedin;
     }
 
     // Slug para id
@@ -560,57 +686,66 @@
     }
 
     // Referencias al DOM
-    const moviesGrid        = document.getElementById("moviesGrid");
+    const skillsGrid        = document.getElementById("skillsGrid");
     const emptyState        = document.getElementById("emptyState");
     const searchInput       = document.getElementById("searchInput");
     const ratingFilter      = document.getElementById("ratingFilter");
-    const addMovieForm      = document.getElementById("addMovieForm");
+    const categoryFilter    = document.getElementById("categoryFilter");
+    const addSkillForm      = document.getElementById("addSkillForm");
     const newTitleInput     = document.getElementById("newTitle");
     const newYearInput      = document.getElementById("newYear");
-    const newTagsInput      = document.getElementById("newTags");
+    const newCategoryInput  = document.getElementById("newCategory");
+    const newDescriptionInput = document.getElementById("newDescription");
     const formTitle         = document.getElementById("formTitle");
     const formDescription   = document.getElementById("formDescription");
     const formButton        = document.getElementById("formButton");
     const cancelEditButton  = document.getElementById("cancelEditButton");
-    const reviewerNameInput = document.getElementById("reviewerName");
+
+    let editingSkillId = null;
 
     function setFormToAddMode() {
-      editingMovieId = null;
-      addMovieForm.reset();
-      formTitle.textContent = "Agregar nueva película";
+      editingSkillId = null;
+      addSkillForm.reset();
+      formTitle.textContent = "Agregar nueva habilidad o logro";
       formDescription.textContent =
-        "Aquí puedes ir sumando las pelis que ves. Se guardan solo en este navegador, así que no necesitas cuenta ni nada raro.";
+        "Documenta tus habilidades, logros, proyectos o intereses. Cada entrada es como una 'reseña' de algo que has aprendido o logrado.";
       formButton.textContent = "Agregar";
       cancelEditButton.style.display = "none";
     }
 
-    function setFormToEditMode(movie) {
-      editingMovieId = movie.id;
-      newTitleInput.value = movie.title || "";
-      newYearInput.value = movie.year || "";
-      newTagsInput.value = movie.tags ? movie.tags.join(", ") : "";
-      formTitle.textContent = "Editar película";
+    function setFormToEditMode(skill) {
+      editingSkillId = skill.id;
+      newTitleInput.value = skill.title || "";
+      newYearInput.value = skill.year || "";
+      newCategoryInput.value = skill.category || "";
+      newDescriptionInput.value = skill.description || "";
+      formTitle.textContent = "Editar habilidad o logro";
       formDescription.textContent =
-        "Estás editando esta película. Cambia lo que quieras y guarda los cambios o cancela.";
+        "Estás editando esta entrada. Cambia lo que quieras y guarda los cambios o cancela.";
       formButton.textContent = "Guardar cambios";
       cancelEditButton.style.display = "inline-block";
     }
 
-    function renderMovies() {
+    function renderSkills() {
       const searchTerm = searchInput.value.toLowerCase().trim();
       const minRating = parseInt(ratingFilter.value, 10);
+      const categoryFilterValue = categoryFilter.value.toLowerCase().trim();
 
-      moviesGrid.innerHTML = "";
+      skillsGrid.innerHTML = "";
 
-      const filtered = movies.filter((movie) => {
-        const mState = getMovieState(movie.id);
+      const filtered = skills.filter((skill) => {
+        const sState = getSkillState(skill.id);
         const text =
-          (movie.title || "") +
+          (skill.title || "") +
           " " +
-          (movie.tags ? movie.tags.join(" ") : "");
+          (skill.category || "") +
+          " " +
+          (skill.description || "");
         const matchesText = text.toLowerCase().includes(searchTerm);
-        const matchesRating = mState.rating >= minRating;
-        return matchesText && matchesRating;
+        const matchesRating = sState.rating >= minRating;
+        const matchesCategory = !categoryFilterValue || 
+          (skill.category && skill.category.toLowerCase().includes(categoryFilterValue));
+        return matchesText && matchesRating && matchesCategory;
       });
 
       if (filtered.length === 0) {
@@ -620,62 +755,66 @@
         emptyState.style.display = "none";
       }
 
-      filtered.forEach((movie) => {
-        const mState = getMovieState(movie.id);
+      filtered.forEach((skill) => {
+        const sState = getSkillState(skill.id);
 
         const card = document.createElement("article");
-        card.className = "movie-card";
+        card.className = "skill-card";
 
         const header = document.createElement("div");
-        header.className = "movie-header";
+        header.className = "skill-header";
 
         const titleBlock = document.createElement("div");
-        const yearText = movie.year ? movie.year : "Año N/D";
-        const tagsText = movie.tags && movie.tags.length
-          ? movie.tags.join(" • ")
-          : "Sin etiquetas";
+        const yearText = skill.year ? skill.year : "";
+        const categoryText = skill.category || "";
+        const descriptionText = skill.description || "";
 
         titleBlock.innerHTML = `
-          <div class="movie-title">${movie.title}</div>
-          <div class="movie-year">${yearText}</div>
-          <div class="tagline">${tagsText}</div>
+          <div class="skill-title">${skill.title}</div>
+          ${yearText ? `<div class="skill-year">${yearText}</div>` : ""}
+          ${categoryText ? `<div class="skill-category">${categoryText}</div>` : ""}
         `;
 
         const badge = document.createElement("div");
         badge.className = "badge";
-        badge.textContent = mState.rating
-          ? `${mState.rating}⭐ opinión personal`
+        badge.textContent = sState.rating
+          ? `${sState.rating}⭐ nivel`
           : "Sin calificar";
 
         header.appendChild(titleBlock);
         header.appendChild(badge);
+
+        if (descriptionText) {
+          const desc = document.createElement("div");
+          desc.style.cssText = "font-size: 0.85rem; color: #6b7280; margin-top: 0.3rem;";
+          desc.textContent = descriptionText;
+          titleBlock.appendChild(desc);
+        }
 
         const starsRow = document.createElement("div");
         starsRow.className = "stars";
         for (let i = 1; i <= 5; i++) {
           const starSpan = document.createElement("span");
           starSpan.textContent = "★";
-          if (i <= mState.rating) {
+          if (i <= sState.rating) {
             starSpan.classList.add("active");
           }
           starSpan.addEventListener("click", () => {
-            setRating(movie.id, i);
+            setRating(skill.id, i);
           });
           starsRow.appendChild(starSpan);
         }
 
         const noteLabel = document.createElement("div");
         noteLabel.className = "note-label";
-        noteLabel.textContent = reviewerName
-          ? `Notas de ${reviewerName}:`
-          : "Notas / qué me pareció:";
+        noteLabel.textContent = "Notas / experiencia:";
 
         const textarea = document.createElement("textarea");
-        textarea.value = mState.note || "";
-        textarea.placeholder = "Ej. La volvería a ver, el final me encantó...";
+        textarea.value = sState.note || "";
+        textarea.placeholder = "Ej. Lo aprendí en un curso, lo uso en proyectos personales, logré implementarlo en...";
         textarea.addEventListener("input", (e) => {
-          const ms = getMovieState(movie.id);
-          ms.note = e.target.value;
+          const ss = getSkillState(skill.id);
+          ss.note = e.target.value;
           saveState();
         });
 
@@ -683,31 +822,28 @@
         metaRow.className = "meta-row";
 
         const leftMeta = document.createElement("div");
-        leftMeta.innerHTML = `Vista el:
+        leftMeta.innerHTML = `Logrado el:
           <input
             type="date"
             class="date-input"
-            value="${mState.watchedAt || ""}"
+            value="${sState.achievedAt || ""}"
           />
         `;
 
         const dateInput = leftMeta.querySelector("input");
         dateInput.addEventListener("change", (e) => {
-          const ms = getMovieState(movie.id);
-          ms.watchedAt = e.target.value;
+          const ss = getSkillState(skill.id);
+          ss.achievedAt = e.target.value;
           saveState();
         });
 
         const rightMeta = document.createElement("div");
         rightMeta.className = "pill";
-        rightMeta.textContent = reviewerName
-          ? `Crítica de: ${reviewerName}`
-          : "Crítica personal";
+        rightMeta.textContent = skill.category || "General";
 
         metaRow.appendChild(leftMeta);
         metaRow.appendChild(rightMeta);
 
-        // Botones Editar / Borrar
         const actionsRow = document.createElement("div");
         actionsRow.className = "actions-row";
 
@@ -716,7 +852,7 @@
         editButton.className = "action-button";
         editButton.textContent = "Editar";
         editButton.addEventListener("click", () => {
-          setFormToEditMode(movie);
+          setFormToEditMode(skill);
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
@@ -725,7 +861,7 @@
         deleteButton.className = "action-button delete";
         deleteButton.textContent = "Borrar";
         deleteButton.addEventListener("click", () => {
-          deleteMovie(movie.id);
+          deleteSkill(skill.id);
         });
 
         actionsRow.appendChild(editButton);
@@ -738,84 +874,82 @@
         card.appendChild(metaRow);
         card.appendChild(actionsRow);
 
-        moviesGrid.appendChild(card);
+        skillsGrid.appendChild(card);
       });
     }
 
-    function setRating(movieId, rating) {
-      const ms = getMovieState(movieId);
-      ms.rating = rating;
+    function setRating(skillId, rating) {
+      const ss = getSkillState(skillId);
+      ss.rating = rating;
       saveState();
-      renderMovies();
+      renderSkills();
     }
 
-    function deleteMovie(movieId) {
-      const movie = movies.find((m) => m.id === movieId);
-      const title = movie ? movie.title : "esta película";
+    function deleteSkill(skillId) {
+      const skill = skills.find((s) => s.id === skillId);
+      const title = skill ? skill.title : "esta entrada";
 
       if (!confirm(`¿Seguro que quieres borrar "${title}" de la lista?`)) {
         return;
       }
 
-      movies = movies.filter((m) => m.id !== movieId);
-      delete state[movieId];
-      saveMovies();
+      skills = skills.filter((s) => s.id !== skillId);
+      delete state[skillId];
+      saveSkills();
       saveState();
 
-      if (editingMovieId === movieId) {
+      if (editingSkillId === skillId) {
         setFormToAddMode();
       }
 
-      renderMovies();
+      renderSkills();
     }
 
     // Eventos
-    searchInput.addEventListener("input", () => renderMovies());
-    ratingFilter.addEventListener("change", () => renderMovies());
+    searchInput.addEventListener("input", () => renderSkills());
+    ratingFilter.addEventListener("change", () => renderSkills());
+    categoryFilter.addEventListener("change", () => renderSkills());
 
-    addMovieForm.addEventListener("submit", (e) => {
+    addSkillForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
       const title = newTitleInput.value.trim();
       const year = newYearInput.value ? parseInt(newYearInput.value, 10) : "";
-      const tags = newTagsInput.value
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
+      const category = newCategoryInput.value.trim();
+      const description = newDescriptionInput.value.trim();
 
       if (!title) {
         alert("Pon al menos un título 🙂");
         return;
       }
 
-      if (!editingMovieId) {
-        // ➕ Modo agregar
+      if (!editingSkillId) {
         let id = slugify(title);
         if (!id) {
-          id = `movie-${Date.now()}`;
+          id = `skill-${Date.now()}`;
         }
 
-        if (movies.some((m) => m.id === id)) {
-          alert("Ya tienes una película con ese título.");
+        if (skills.some((s) => s.id === id)) {
+          alert("Ya tienes una entrada con ese título.");
           return;
         }
 
-        const newMovie = { id, title, year, tags };
-        movies.push(newMovie);
-        saveMovies();
+        const newSkill = { id, title, year, category, description };
+        skills.push(newSkill);
+        saveSkills();
         setFormToAddMode();
-        renderMovies();
+        renderSkills();
       } else {
-        // ✏️ Modo editar
-        const idx = movies.findIndex((m) => m.id === editingMovieId);
+        const idx = skills.findIndex((s) => s.id === editingSkillId);
         if (idx !== -1) {
-          movies[idx].title = title;
-          movies[idx].year = year;
-          movies[idx].tags = tags;
-          saveMovies();
+          skills[idx].title = title;
+          skills[idx].year = year;
+          skills[idx].category = category;
+          skills[idx].description = description;
+          saveSkills();
         }
         setFormToAddMode();
-        renderMovies();
+        renderSkills();
       }
     });
 
@@ -823,22 +957,48 @@
       setFormToAddMode();
     });
 
-    reviewerNameInput.addEventListener("input", (e) => {
-      reviewerName = e.target.value.trim();
-      saveReviewerName();
-      renderMovies();
-    });
+    // Función para intentar cargar imagen con extensión alternativa
+    function tryAlternativeImage(img) {
+      const currentSrc = img.src;
+      const placeholder = document.getElementById("profilePlaceholder");
+      
+      // Si ya intentó .jpeg, mostrar placeholder
+      if (currentSrc.includes('.jpeg')) {
+        img.style.display = 'none';
+        placeholder.style.display = 'flex';
+        return;
+      }
+      
+      // Intentar con .jpeg si .jpg falló
+      if (currentSrc.includes('.jpg')) {
+        img.src = currentSrc.replace('.jpg', '.jpeg');
+        return;
+      }
+      
+      // Si no es .jpg, intentar agregar .jpeg
+      if (!currentSrc.includes('.jpeg')) {
+        img.src = currentSrc.replace(/\.[^.]+$/, '.jpeg');
+        return;
+      }
+      
+      // Si todo falla, mostrar placeholder
+      img.style.display = 'none';
+      placeholder.style.display = 'flex';
+    }
 
     // Inicializar
     loadState();
-    loadMovies();
-    loadReviewerName();
-    if (reviewerName) {
-      reviewerNameInput.value = reviewerName;
-    }
+    loadSkills();
+    loadProfile();
     setFormToAddMode();
-    renderMovies();
+    renderSkills();
+
+    // Actualizar fecha
+    document.getElementById("lastUpdate").textContent = new Date().toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   </script>
 </body>
 </html>
-
