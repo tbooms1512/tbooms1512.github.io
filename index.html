@@ -438,7 +438,7 @@
       <div class="profile-section">
         <div class="profile-image-container">
           <!-- Coloca tu foto en images/profile.jpg o images/profile.jpeg -->
-          <img src="images/profile.jpg" alt="Tomas Boom" class="profile-image" id="profileImg" onerror="tryAlternativeImage(this);">
+          <img src="" alt="Tomas Boom" class="profile-image" id="profileImg">
           <div class="profile-image-placeholder" id="profilePlaceholder" style="display:none;">👤</div>
         </div>
         <div class="profile-info">
@@ -957,39 +957,42 @@
       setFormToAddMode();
     });
 
-    // Función para intentar cargar imagen con extensión alternativa
-    function tryAlternativeImage(img) {
-      const currentSrc = img.src;
+    // Función para cargar imagen de perfil (intenta ambas extensiones)
+    function loadProfileImage() {
+      const img = document.getElementById("profileImg");
       const placeholder = document.getElementById("profilePlaceholder");
+      const basePath = "images/profile";
       
-      // Si ya intentó .jpeg, mostrar placeholder
-      if (currentSrc.includes('.jpeg')) {
-        img.style.display = 'none';
-        placeholder.style.display = 'flex';
-        return;
-      }
-      
-      // Intentar con .jpeg si .jpg falló
-      if (currentSrc.includes('.jpg')) {
-        img.src = currentSrc.replace('.jpg', '.jpeg');
-        return;
-      }
-      
-      // Si no es .jpg, intentar agregar .jpeg
-      if (!currentSrc.includes('.jpeg')) {
-        img.src = currentSrc.replace(/\.[^.]+$/, '.jpeg');
-        return;
-      }
-      
-      // Si todo falla, mostrar placeholder
-      img.style.display = 'none';
-      placeholder.style.display = 'flex';
+      // Intentar primero .jpeg (ya que ese es el archivo que existe)
+      const jpegImg = new Image();
+      jpegImg.onload = function() {
+        img.src = basePath + ".jpeg";
+        img.style.display = "block";
+        placeholder.style.display = "none";
+      };
+      jpegImg.onerror = function() {
+        // Si .jpeg falla, intentar .jpg
+        const jpgImg = new Image();
+        jpgImg.onload = function() {
+          img.src = basePath + ".jpg";
+          img.style.display = "block";
+          placeholder.style.display = "none";
+        };
+        jpgImg.onerror = function() {
+          // Si ambas fallan, mostrar placeholder
+          img.style.display = "none";
+          placeholder.style.display = "flex";
+        };
+        jpgImg.src = basePath + ".jpg";
+      };
+      jpegImg.src = basePath + ".jpeg";
     }
 
     // Inicializar
     loadState();
     loadSkills();
     loadProfile();
+    loadProfileImage(); // Cargar imagen de perfil
     setFormToAddMode();
     renderSkills();
 
